@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="PYTHON_P6_PERINTAH_KENDALI" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG_PYTHON_P6">
+    <organization identifier="ORG_PYTHON_P6">
+      <title>Pemrograman Python - Perintah Kendali</title>
+      <item identifier="ITEM_MATERI" identifierref="RES_MATERI" isvisible="true">
+        <title>Perintah Kendali: Pengambilan Keputusan dan Perulangan</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES_MATERI" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="css/style.css"/>
+      <file href="js/scorm.js"/>
+      <file href="js/app.js"/>
+    </resource>
+  </resources>
+</manifest>

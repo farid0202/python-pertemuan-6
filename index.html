@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perintah Kendali Python</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="wrap">
+    <p class="course">Pemrograman Python · Pertemuan 6</p>
+    <h1 class="app-title">Perintah Kendali: Pengambilan Keputusan &amp; Perulangan</h1>
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  </div>
+</header>
+
+<nav class="tabbar" aria-label="Daftar tab materi">
+  <div class="wrap" id="tabbar"></div>
+</nav>
+
+<main id="main">
+
+<!-- ================= TAB 1: KONSEP ================= -->
+<section class="panel" data-title="Konsep">
+  <div class="panel-head">
+    <span class="eyebrow">Tab 1 · Konsep</span>
+    <h2>Memilih jalan dan mengulang pekerjaan</h2>
+    <p class="lead">Sejauh ini programmu berjalan lurus dari atas ke bawah. Dengan <b>perintah kendali</b>, program bisa <b>memilih</b> perintah mana yang dijalankan (pengambilan keputusan) dan <b>mengulang</b> perintah berkali-kali (perulangan). Persis seperti yang kamu lakukan setiap hari.</p>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card"><b>🔀 Pengambilan keputusan</b>
+      <p>Komputer memutuskan <b>mengerjakan atau tidak mengerjakan</b> sebuah perintah berdasarkan kondisi. Kondisi dievaluasi menjadi <b>True</b> atau <b>False</b>. Komputer hanya masuk ke <b>satu</b> cabang, karena kondisi tidak bisa bernilai benar dan salah sekaligus.</p></div>
+    <div class="card"><b>🔁 Perulangan</b>
+      <p>Komputer <b>mengulang</b> satu atau sekelompok perintah. Ada dua jenis:</p>
+      <ul><li><b>for</b>: ulangi untuk <b>setiap item</b> dalam koleksi (jumlahnya pasti).</li>
+      <li><b>while</b>: ulangi <b>selama</b> kondisi masih True (jumlahnya belum tentu diketahui).</li></ul></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Interaktif</span><h3>Keputusan dan perulangan di harimu</h3></div>
+    <p class="i-desc">Klik setiap kartu untuk melihat algoritmanya.</p>
+    <div class="grid grid-3">
+      <button class="flip" type="button"><div class="flip-inner">
+        <div class="flip-face flip-front"><span class="flip-emoji">🌧️</span><h4>Mau berangkat kuliah</h4><p>Kalau hujan bawa payung, kalau tidak pakai topi.</p><span class="flip-tap">Keputusan · klik ↻</span></div>
+        <div class="flip-face flip-back"><pre style="margin:0;white-space:pre-wrap;font-family:var(--mono);font-size:.82rem">IF hujan THEN
+   bawa payung
+ELSE
+   pakai topi
+ENDIF</pre></div></div></button>
+      <button class="flip" type="button"><div class="flip-inner">
+        <div class="flip-face flip-front"><span class="flip-emoji">🚦</span><h4>Lampu lalu lintas</h4><p>Merah berhenti, kuning hati-hati, hijau jalan.</p><span class="flip-tap">Keputusan bertingkat · klik ↻</span></div>
+        <div class="flip-face flip-back"><pre style="margin:0;white-space:pre-wrap;font-family:var(--mono);font-size:.82rem">IF lampu == "merah" THEN
+   berhenti
+ELSE IF lampu == "kuning" THEN
+   hati-hati
+ELSE
+   jalan
+ENDIF</pre></div></div></button>
+      <button class="flip" type="button"><div class="flip-inner">
+        <div class="flip-face flip-front"><span class="flip-emoji">🛵</span><h4>Gratis ongkir</h4><p>Belanja minimal Rp50.000 dapat gratis ongkir.</p><span class="flip-tap">Keputusan · klik ↻</span></div>
+        <div class="flip-face flip-back"><pre style="margin:0;white-space:pre-wrap;font-family:var(--mono);font-size:.82rem">IF total >= 50000 THEN
+   ongkir ← 0
+ELSE
+   ongkir ← 10000
+ENDIF</pre></div></div></button>
+      <button class="flip" type="button"><div class="flip-inner">
+        <div class="flip-face flip-front"><span class="flip-emoji">📋</span><h4>Absen kelas</h4><p>Dosen memanggil satu per satu nama di daftar hadir.</p><span class="flip-tap">Perulangan for · klik ↻</span></div>
+        <div class="flip-face flip-back"><pre style="margin:0;white-space:pre-wrap;font-family:var(--mono);font-size:.82rem">FOR EACH nama IN daftar_hadir
+   panggil nama
+ENDFOR</pre><p style="margin-top:6px">Jumlah ulangan = jumlah mahasiswa di daftar.</p></div></div></button>
+      <button class="flip" type="button"><div class="flip-inner">
+        <div class="flip-face flip-front"><span class="flip-emoji">🪣</span><h4>Mengisi bak mandi</h4><p>Terus menimba air sampai bak penuh.</p><span class="flip-tap">Perulangan while · klik ↻</span></div>
+        <div class="flip-face flip-back"><pre style="margin:0;white-space:pre-wrap;font-family:var(--mono);font-size:.82rem">WHILE bak belum penuh DO
+   timba satu ember
+   tuang ke bak
+ENDWHILE</pre><p style="margin-top:6px">Berapa ember? Tidak tahu di awal, pokoknya selama belum penuh.</p></div></div></button>
+      <button class="flip" type="button"><div class="flip-inner">
+        <div class="flip-face flip-front"><span class="flip-emoji">🏧</span><h4>Memasukkan PIN ATM</h4><p>Diminta ulang selama PIN salah.</p><span class="flip-tap">Perulangan + keputusan · klik ↻</span></div>
+        <div class="flip-face flip-back"><pre style="margin:0;white-space:pre-wrap;font-family:var(--mono);font-size:.82rem">WHILE pin != pin_benar DO
+   INPUT pin
+ENDWHILE
+OUTPUT "Silakan pilih transaksi"</pre></div></div></button>
+    </div>
+  </div>
+
+  <h3>Cara menuliskannya dalam algoritma</h3>
+  <div class="notation">
+    <div class="card"><h4>Keputusan</h4>
+<pre class="algo">IF kondisi THEN
+   perintah_1
+ELSE
+   perintah_2
+ENDIF</pre></div>
+    <div class="card"><h4>Perulangan koleksi</h4>
+<pre class="algo">FOR EACH item IN koleksi
+   perintah
+ENDFOR</pre></div>
+    <div class="card"><h4>Perulangan kondisional</h4>
+<pre class="algo">WHILE kondisi DO
+   perintah
+ENDWHILE</pre></div>
+  </div>
+
+  <h3>Contoh algoritma dan flowchart</h3>
+  <div class="grid grid-2">
+    <div>
+<pre class="algo"><b>Algoritma Bilangan Genap dan Ganjil</b>
+input  : angka dari pengguna → a
+output : kategori angka (genap/ganjil)
+
+START
+   INPUT a
+   IF a habis dibagi 2 THEN
+      OUTPUT "Angka termasuk bilangan genap"
+   ELSE
+      OUTPUT "Angka termasuk bilangan ganjil"
+   ENDIF
+END</pre>
+      <p>Pada flowchart, kondisi ditulis di <b>belah ketupat</b> (<i>decision</i>). Dari belah ketupat keluar dua panah: satu untuk True (Ya), satu untuk False (Tidak). Karena alurnya bercabang, bentuk ini disebut juga <b>percabangan</b>.</p>
+    </div>
+    <svg class="flow" viewBox="0 0 340 360" role="img" aria-label="Flowchart bilangan genap dan ganjil">
+      <defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2e8b4f"/></marker></defs>
+      <g font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" text-anchor="middle">
+        <rect x="120" y="8" width="100" height="32" rx="16" fill="#e4f5e7" stroke="#2e8b4f" stroke-width="2"/><text x="170" y="29" fill="#1b3024" font-weight="700">START</text>
+        <line x1="170" y1="40" x2="170" y2="62" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah1)"/>
+        <polygon points="115,64 235,64 225,98 105,98" fill="#fff" stroke="#2e8b4f" stroke-width="2"/><text x="170" y="86" fill="#1b3024">INPUT a</text>
+        <line x1="170" y1="98" x2="170" y2="120" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah1)"/>
+        <polygon points="170,122 250,162 170,202 90,162" fill="#fff4dc" stroke="#b7791f" stroke-width="2"/><text x="170" y="160" fill="#1b3024" font-weight="700">a habis</text><text x="170" y="175" fill="#1b3024" font-weight="700">dibagi 2?</text>
+        <line x1="90" y1="162" x2="62" y2="162" stroke="#2e8b4f" stroke-width="2"/><line x1="62" y1="162" x2="62" y2="232" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah1)"/>
+        <text x="78" y="154" fill="#1d5c34" font-weight="700">Ya</text>
+        <line x1="250" y1="162" x2="278" y2="162" stroke="#2e8b4f" stroke-width="2"/><line x1="278" y1="162" x2="278" y2="232" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah1)"/>
+        <text x="265" y="154" fill="#9b2c1f" font-weight="700">Tidak</text>
+        <polygon points="14,234 122,234 112,268 4,268" fill="#e1f4e5" stroke="#2e8b4f" stroke-width="2"/><text x="63" y="256" fill="#1b3024">"genap"</text>
+        <polygon points="228,234 336,234 326,268 218,268" fill="#fde3df" stroke="#c0392b" stroke-width="2"/><text x="277" y="256" fill="#1b3024">"ganjil"</text>
+        <line x1="62" y1="268" x2="62" y2="300" stroke="#2e8b4f" stroke-width="2"/><line x1="278" y1="268" x2="278" y2="300" stroke="#2e8b4f" stroke-width="2"/>
+        <line x1="62" y1="300" x2="278" y2="300" stroke="#2e8b4f" stroke-width="2"/>
+        <line x1="170" y1="300" x2="170" y2="318" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah1)"/>
+        <rect x="120" y="320" width="100" height="32" rx="16" fill="#e4f5e7" stroke="#2e8b4f" stroke-width="2"/><text x="170" y="341" fill="#1b3024" font-weight="700">END</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="grid grid-2">
+    <div>
+<pre class="algo"><b>Algoritma Menampilkan Angka</b>
+START
+   INPUT angka
+   WHILE angka &lt; 5 DO
+      OUTPUT angka
+      angka ← angka + 1
+   ENDWHILE
+   OUTPUT "Program selesai"
+END</pre>
+      <p>Pada flowchart perulangan, ada panah yang <b>kembali ke atas</b> menuju belah ketupat. Selama kondisi True, alur terus berputar. Begitu kondisi False, alur keluar dari putaran.</p>
+    </div>
+    <svg class="flow" viewBox="0 0 370 420" role="img" aria-label="Flowchart perulangan while">
+      <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2e8b4f"/></marker></defs>
+      <g font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" text-anchor="middle">
+        <rect x="130" y="8" width="100" height="30" rx="15" fill="#e4f5e7" stroke="#2e8b4f" stroke-width="2"/><text x="180" y="28" fill="#1b3024" font-weight="700">START</text>
+        <line x1="180" y1="38" x2="180" y2="58" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah2)"/>
+        <polygon points="125,60 245,60 235,92 115,92" fill="#fff" stroke="#2e8b4f" stroke-width="2"/><text x="180" y="81" fill="#1b3024">INPUT angka</text>
+        <line x1="180" y1="92" x2="180" y2="112" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah2)"/>
+        <polygon points="180,114 260,152 180,190 100,152" fill="#fff4dc" stroke="#b7791f" stroke-width="2"/><text x="180" y="157" fill="#1b3024" font-weight="700">angka &lt; 5 ?</text>
+        <line x1="180" y1="190" x2="180" y2="212" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah2)"/><text x="192" y="206" fill="#1d5c34" font-weight="700" text-anchor="start">Ya</text>
+        <polygon points="125,214 245,214 235,246 115,246" fill="#e1f4e5" stroke="#2e8b4f" stroke-width="2"/><text x="180" y="235" fill="#1b3024">OUTPUT angka</text>
+        <line x1="180" y1="246" x2="180" y2="266" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah2)"/>
+        <rect x="110" y="268" width="140" height="32" rx="4" fill="#fff" stroke="#2e8b4f" stroke-width="2"/><text x="180" y="289" fill="#1b3024">angka ← angka + 1</text>
+        <polyline points="110,284 40,284 40,152 98,152" fill="none" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah2)"/>
+        <text x="40" y="225" fill="#557062" font-size="11" transform="rotate(-90 40 225)" dy="-6">ulangi</text>
+        <polyline points="260,152 305,152 305,326" fill="none" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah2)"/><text x="283" y="144" fill="#9b2c1f" font-weight="700">Tidak</text>
+        <polygon points="250,328 365,328 355,360 240,360" fill="#fff" stroke="#2e8b4f" stroke-width="2"/><text x="302" y="349" fill="#1b3024" font-size="12">"Program selesai"</text>
+        <line x1="302" y1="360" x2="302" y2="380" stroke="#2e8b4f" stroke-width="2" marker-end="url(#ah2)"/>
+        <rect x="252" y="382" width="100" height="30" rx="15" fill="#e4f5e7" stroke="#2e8b4f" stroke-width="2"/><text x="302" y="402" fill="#1b3024" font-weight="700">END</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Keputusan, for, atau while?</h3></div>
+    <p class="i-desc">Baca situasinya, lalu tentukan perintah kendali yang paling cocok.</p>
+    <div id="drillKonsep"></div>
+  </div>
+</section>
+
+<!-- ================= TAB 2: IF-ELSE ================= -->
+<section class="panel" data-title="if – else">
+  <div class="panel-head">
+    <span class="eyebrow">Tab 2 · Perintah if dan if-else</span>
+    <h2>Perintah <code>if</code> dan <code>if-else</code></h2>
+    <p class="lead">Python memakai kata <code>if</code> untuk mengambil keputusan. Kondisi ditulis setelah <code>if</code>, diakhiri <b>titik dua</b>. Perintah yang dijalankan jika kondisi True ditulis <b>menjorok ke dalam</b>.</p>
+  </div>
+
+  <div class="grid grid-2">
+<pre class="code" data-label="if">if kondisi:
+    instruksi</pre>
+<pre class="code" data-label="if-else">if kondisi:
+    instruksi_1      # jika True
+else:
+    instruksi_2      # jika False</pre>
+  </div>
+  <div class="grid grid-2">
+<pre class="code" data-label="contoh if">nilai = 70
+if nilai > 50:
+    print("Selamat anda telah lulus")
+print("Program selesai")</pre>
+<pre class="code" data-label="contoh if-else">a = 9
+if a % 2 == 0:
+    print("Bilangan Genap")
+else:
+    print("Bilangan Ganjil")</pre>
+  </div>
+  <p>Pada contoh kiri, baris <code>print("Program selesai")</code> <b>tidak menjorok</b>, jadi bukan bagian dari <code>if</code> dan selalu dijalankan. Pada contoh kanan, <code>9 % 2</code> menghasilkan 1, sehingga kondisi False dan yang tampil "Bilangan Ganjil".</p>
+
+  <h3>Bahan untuk menyusun kondisi</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Jenis</th><th>Operator</th><th>Contoh kondisi</th></tr></thead>
+    <tbody>
+      <tr><td>Perbandingan</td><td class="sym">== != &gt; &lt; &gt;= &lt;=</td><td><code>umur &gt;= 17</code></td></tr>
+      <tr><td>Logika</td><td class="sym">and or not</td><td><code>umur &gt;= 17 and punya_ktp</code></td></tr>
+      <tr><td>Keanggotaan</td><td class="sym">in</td><td><code>"gratis" in teks_email</code></td></tr>
+      <tr><td>Nilai langsung</td><td class="sym">—</td><td><code>if 0:</code> dianggap False, <code>if 5:</code> dianggap True</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout info"><strong>Operator <code>in</code>: cek keanggotaan</strong>
+    Menghasilkan True jika sebuah data ada di dalam koleksi (list, tuple, string).
+    <code>'minyak' in ['tepung', 'minyak', 'telur']</code> → True. <code>'s' in 'komputer'</code> → False. Ingat, huruf besar dan kecil dianggap berbeda.</div>
+  <div class="callout warn"><strong>Python menganggap nol dan <code>None</code> sebagai False</strong>
+    Nilai selain nol dan <code>None</code> dianggap True. Jadi <code>if 0:</code> tidak akan menjalankan blok di bawahnya. String kosong <code>""</code> dan list kosong <code>[]</code> juga dianggap False.</div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Simulasi</span><h3>Ikuti jalannya program</h3></div>
+    <p class="i-desc">Pilih program, ubah datanya, lalu tekan <b>▶ Langkah</b> untuk menjalankan baris demi baris. Perhatikan kondisi dievaluasi menjadi True atau False.</p>
+    <div id="trIf"></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Apa yang tampil di layar?</h3></div>
+    <p class="i-desc">Perhatikan kondisi, operator <code>in</code>, dan indentasi.</p>
+    <div id="drillIf"></div>
+  </div>
+
+  <h3>Dari masalah ke pseudocode ke kode</h3>
+  <p>Langkahnya: (1) tentukan input dan output, (2) temukan <b>kondisi</b> yang menentukan pilihan, (3) tulis pseudocode IF-ELSE, (4) terjemahkan ke Python.</p>
+  <div class="callout info"><strong>Mengambil bagian string dengan slicing</strong>
+    Tanggal "2005-08-20" disimpan sebagai string. <code>lahir[5:7]</code> mengambil karakter indeks 5 dan 6, yaitu <code>"08"</code> (bulan). Ini dipakai di soal C.</div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Studio</span><h3>Terjemahkan masalah menjadi pseudocode, lalu kode</h3></div>
+    <p class="i-desc">Pilih soal. Langkah 1: susun pseudocode-nya. Langkah 2: susun kode Python-nya. Hati-hati dengan baris jebakan!</p>
+    <div id="studioIf"></div>
+  </div>
+</section>
+
+<!-- ================= TAB 3: IF-ELIF-ELSE ================= -->
+<section class="panel" data-title="if – elif – else">
+  <div class="panel-head">
+    <span class="eyebrow">Tab 3 · Perintah if-elif-else</span>
+    <h2>Banyak pilihan: <code>if-elif-else</code></h2>
+    <p class="lead"><code>elif</code> adalah singkatan dari <i>else if</i>. Dipakai saat ada lebih dari dua kemungkinan. Satu <code>if</code> boleh diikuti satu atau banyak <code>elif</code>, dan <code>else</code> di akhir bersifat opsional.</p>
+  </div>
+
+  <div class="grid grid-2">
+<pre class="code" data-label="pola">if kondisi_1:
+    instruksi_1
+elif kondisi_2:
+    instruksi_2
+else:
+    instruksi_3</pre>
+<pre class="code" data-label="contoh">num1 = 2
+num2 = 5
+
+if num1 > num2:
+    print("Angka 1 lebih besar daripada angka 2")
+elif num1 < num2:
+    print("Angka 2 lebih besar daripada angka 1")
+else:
+    print("Angka 1 bernilai sama dengan angka 2")</pre>
+  </div>
+  <p>Python memeriksa kondisi <b>dari atas ke bawah</b>. Begitu menemukan kondisi True, blok itu dijalankan lalu <b>seluruh perintah if selesai</b>; kondisi di bawahnya tidak diperiksa lagi. Jika semua False, blok <code>else</code> yang dijalankan. Contoh di atas menampilkan "Angka 2 lebih besar daripada angka 1".</p>
+
+  <div class="callout warn"><strong>Urutan kondisi sangat menentukan!</strong>
+    Karena pemeriksaan berhenti di kondisi True pertama, kondisi yang <b>lebih sempit</b> (misalnya <code>nilai &gt;= 90</code>) harus diletakkan <b>sebelum</b> kondisi yang lebih luas (<code>nilai &gt;= 50</code>).</div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Simulasi</span><h3>Kasus 1 vs Kasus 2: urutan yang salah dan yang benar</h3></div>
+    <p class="i-desc">Geser nilai dan bandingkan hasil kedua program. Mengapa Kasus 1 selalu memberi "Nilai D"?</p>
+    <div class="slider-row"><label for="ksVal">nilai =</label><input type="range" id="ksVal" min="0" max="100" value="75"><span class="slider-val" id="ksShow">75</span></div>
+    <div class="compare">
+      <div><h4>Kasus 1 (urutan salah)</h4><div class="code-lines" id="ks1"></div><div class="verdict" id="ks1v"></div></div>
+      <div><h4>Kasus 2 (urutan benar)</h4><div class="code-lines" id="ks2"></div><div class="verdict" id="ks2v"></div></div>
+    </div>
+  </div>
+
+  <div class="callout info"><strong>Beda <code>if-elif</code> dengan beberapa <code>if</code> terpisah</strong>
+    Pada <code>if-elif</code>, hanya <b>satu</b> blok yang dijalankan. Pada beberapa <code>if</code> terpisah, <b>setiap</b> <code>if</code> diperiksa sendiri-sendiri, sehingga bisa lebih dari satu blok yang jalan (seperti diskon Supermarket Barakah di Tab 2).</div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Apa yang tampil di layar?</h3></div>
+    <div id="drillElif"></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Lengkapi kodenya</h3></div>
+    <p class="i-desc">Pilih bagian yang tepat, lalu tekan <b>Periksa</b>. Soal 2 menggabungkan if-elif-else dengan fungsi.</p>
+    <div id="fillElif"></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Studio</span><h3>Kategori usia: dari pseudocode ke kode</h3></div>
+    <p class="i-desc">Susun pseudocode, lalu kode Python-nya.</p>
+    <div id="studioElif"></div>
+  </div>
+</section>
+
+<!-- ================= TAB 4: MATCH-CASE ================= -->
+<section class="panel" data-title="match – case">
+  <div class="panel-head">
+    <span class="eyebrow">Tab 4 · Perintah match-case</span>
+    <h2>Mencocokkan nilai dengan <code>match-case</code></h2>
+    <p class="lead"><code>match-case</code> (<i>Structural Pattern Matching</i>) mencocokkan sebuah nilai dengan beberapa pola. Cocok untuk memeriksa <b>nilai spesifik</b>, seperti pilihan menu atau tombol, dengan tulisan yang lebih rapi daripada deretan <code>elif</code>.</p>
+  </div>
+
+<pre class="code" data-label="pola">match variabel:
+    case nilai_1:
+        # dijalankan jika variabel cocok dengan nilai_1
+    case nilai_2:
+        # dijalankan jika variabel cocok dengan nilai_2
+    case _:
+        # default: jika tidak ada pola di atas yang cocok</pre>
+  <ul>
+    <li>Garis bawah <code>_</code> adalah <b>wildcard</b> (cocok dengan apa saja), mirip <code>else</code>. Letakkan di paling akhir.</li>
+    <li>Gabungkan beberapa nilai dalam satu case dengan <code>|</code> (artinya "atau").</li>
+    <li>Seperti if-elif, hanya <b>case pertama yang cocok</b> yang dijalankan.</li>
+  </ul>
+  <div class="callout info"><strong>Butuh Python 3.10 atau lebih baru</strong>
+    Cek versimu dengan perintah <code>python3 --version</code> di terminal. Di pythonanywhere, pilih konsol Python versi 3.10 ke atas.</div>
+
+  <div class="grid grid-2">
+<pre class="code" data-label="dengan if-elif-else">def proses_tombol(tombol):
+    if tombol == "w":
+        print("Maju ke depan")
+    elif tombol == "s":
+        print("Mundur ke belakang")
+    elif tombol == "a":
+        print("Belok kiri")
+    elif tombol == "d":
+        print("Belok kanan")
+    else:
+        print("Tombol tidak dikenal")</pre>
+<pre class="code" data-label="dengan match-case">def proses_tombol(tombol):
+    match tombol:
+        case "w":
+            print("Maju ke depan")
+        case "s":
+            print("Mundur ke belakang")
+        case "a":
+            print("Belok kiri")
+        case "d":
+            print("Belok kanan")
+        case _:
+            print("Tombol tidak dikenal")</pre>
+  </div>
+<pre class="code" data-label="beberapa nilai sekaligus">def cek_kategori_hari(hari):
+    match hari:
+        case "Senin" | "Selasa" | "Rabu" | "Kamis" | "Jumat":
+            print("Hari kerja")
+        case "Sabtu" | "Minggu":
+            print("Akhir pekan")
+        case _:
+            print("Nama hari tidak valid")
+
+cek_kategori_hari("Sabtu")     # Output: Akhir pekan</pre>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Skenario</th><th>if-elif-else</th><th>match-case</th></tr></thead>
+    <tbody>
+      <tr><td>Perbandingan rentang nilai (<code>x &gt; 10</code>, <code>a &lt;= b</code>)</td><td><b>Sangat cocok</b></td><td>Kurang efisien</td></tr>
+      <tr><td>Pengecekan nilai tunggal secara langsung (pilihan menu, tombol, nama hari)</td><td>Bisa</td><td><b>Sangat rapi</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Simulasi</span><h3>Case mana yang cocok?</h3></div>
+    <p class="i-desc">Pilih nilainya, lalu jalankan. Lihat Python mencocokkan nilai dengan setiap case dari atas.</p>
+    <div id="trMatch"></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Apa yang tampil di layar?</h3></div>
+    <div id="drillMatch"></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Lebih cocok pakai apa?</h3></div>
+    <div id="drillPilih"></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Tulis match-case</h3></div>
+    <p class="i-desc">Lengkapi kode agar hasilnya sesuai komentar.</p>
+    <div id="fillMatch"></div>
+  </div>
+</section>
+
+<!-- ================= TAB 5: FOR ================= -->
+<section class="panel" data-title="Perulangan for">
+  <div class="panel-head">
+    <span class="eyebrow">Tab 5 · Perulangan for</span>
+    <h2>Perulangan koleksi: <code>for</code></h2>
+    <p class="lead">Python memakai perulangan <b>berbasis koleksi</b>: jumlah perulangan sama dengan jumlah item dalam koleksi (list, tuple, string, atau <code>range</code>).</p>
+  </div>
+
+<pre class="code" data-label="pola">for var in koleksi:
+    perintah</pre>
+  <p><code>for … in</code> adalah pasangan wajib. <code>var</code> adalah <b>variabel perulangan</b>: nilainya berganti di setiap <b>iterasi</b> (satu putaran), mulai dari item ke-0 sampai item terakhir. Setelah semua item terpakai, perulangan selesai.</p>
+  <div class="grid grid-2">
+<pre class="code" data-label="list">kota = ["Solo", "Jogja", "Jakarta"]
+for k in kota:
+    print(k)</pre>
+<pre class="code output" data-label="layar">Solo
+Jogja
+Jakarta</pre>
+  </div>
+
+  <h3>Fungsi <code>range</code></h3>
+  <p><code>range</code> menghasilkan deretan bilangan bulat yang bisa dipakai di <code>for</code>. Untuk melihat isinya, ubah dulu menjadi list dengan <code>list()</code>.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Bentuk</th><th>Arti</th><th>Contoh</th><th>Hasil <code>list(...)</code></th></tr></thead>
+    <tbody>
+      <tr><td><code>range(stop)</code></td><td>mulai 0, berhenti <b>sebelum</b> stop</td><td><code>range(2)</code></td><td><code>[0, 1]</code></td></tr>
+      <tr><td><code>range(start, stop)</code></td><td>mulai dari start</td><td><code>range(2, 8)</code></td><td><code>[2, 3, 4, 5, 6, 7]</code></td></tr>
+      <tr><td><code>range(start, stop, step)</code></td><td>naik sebesar step</td><td><code>range(2, 8, 2)</code></td><td><code>[2, 4, 6]</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Lab</span><h3>Laboratorium range</h3></div>
+    <p class="i-desc">Ubah start, stop, dan step. Coba juga step negatif untuk menghitung mundur.</p>
+    <div class="preset" id="rgPreset"></div>
+    <div class="lab-row">
+      <label>start <input type="number" id="rgA" value="2"></label>
+      <label>stop <input type="number" id="rgB" value="8"></label>
+      <label>step <input type="number" id="rgC" value="2"></label>
+    </div>
+    <div class="lab-out" id="rgOut"></div>
+    <div class="chips" id="rgChips"></div>
+    <p class="lab-note" id="rgNote"></p>
+  </div>
+
+  <h3>Pola-pola penting</h3>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
+    <div class="card"><b>Akumulator (menjumlahkan)</b>
+<pre class="code">total = 0
+for n in [80, 75, 90]:
+    total += n         # sama dengan total = total + n
+print(total)           # 245</pre></div>
+    <div class="card"><b>Penyaring (for + if)</b>
+<pre class="code">tup = (3, 4, 2, 7, 6, 9)
+for data in tup:
+    if data % 2 == 0:
+        print(data)     # 4, 2, 6</pre></div>
+    <div class="card"><b>Penghitung</b>
+<pre class="code">jumlah = 0
+for h in "informatika":
+    if h in "aiueo":
+        jumlah += 1
+print(jumlah)          # 5 huruf vokal</pre></div>
+    <div class="card"><b>Akses lewat indeks</b>
+<pre class="code">buah = ["apel", "jeruk", "mangga"]
+for i in range(len(buah)):
+    print(i, buah[i])  # 0 apel, 1 jeruk, ...</pre></div>
+  </div>
+  <div class="callout info"><strong>Operator <code>+=</code> dan <code>-=</code></strong>
+    <code>total += n</code> adalah singkatan dari <code>total = total + n</code>. Begitu juga <code>angka -= 1</code> sama dengan <code>angka = angka - 1</code>.</div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Simulasi</span><h3>Iterasi demi iterasi</h3></div>
+    <p class="i-desc">Pilih program dan tekan <b>▶ Langkah</b>. Perhatikan nilai variabel perulangan berganti di setiap iterasi. Soal "Pengunjung web" adalah contoh dari modul yang sudah diperbaiki.</p>
+    <div id="trFor"></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Apa yang tampil di layar?</h3></div>
+    <div id="drillFor"></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Susun program perulangan</h3></div>
+    <p class="i-desc">Perhatikan indentasi: mana yang diulang, mana yang dijalankan sekali saja.</p>
+    <div id="parsonsFor"></div>
+  </div>
+</section>
+
+<!-- ================= TAB 6: WHILE ================= -->
+<section class="panel" data-title="Perulangan while">
+  <div class="panel-head">
+    <span class="eyebrow">Tab 6 · Perulangan while</span>
+    <h2>Perulangan kondisional: <code>while</code></h2>
+    <p class="lead"><code>while</code> menjalankan perintah berulang-ulang <b>selama</b> kondisi masih True. Kondisi diperiksa <b>sebelum</b> setiap putaran. Begitu kondisi False, perulangan berhenti.</p>
+  </div>
+
+<pre class="code" data-label="pola">while kondisi:
+    perintah</pre>
+  <div class="grid grid-2">
+<pre class="code" data-label="kode">angka = input("Masukkan angka: ")
+angka = int(angka)
+while angka &lt; 5:
+    print("Angka yang ditampilkan:", angka)
+    angka += 1
+print("Program selesai")</pre>
+<pre class="code output" data-label="layar (input 0)">Masukkan angka: 0
+Angka yang ditampilkan: 0
+Angka yang ditampilkan: 1
+Angka yang ditampilkan: 2
+Angka yang ditampilkan: 3
+Angka yang ditampilkan: 4
+Program selesai</pre>
+  </div>
+
+  <h3>Bahaya: <i>infinite loop</i></h3>
+  <p>Jika kondisi <b>tidak pernah</b> menjadi False, program berputar terus tanpa henti. Ini disebut <b>infinite loop</b>.</p>
+  <div class="grid grid-2">
+<pre class="code" data-label="infinite loop ✗">nilai = 5
+while nilai > 0:
+    nilai += 1          # nilai makin besar, selalu > 0
+    print("Angka :", nilai)</pre>
+<pre class="code" data-label="diperbaiki ✓">nilai = 5
+while nilai > 0:
+    print("Angka :", nilai)
+    nilai -= 1          # nilai makin kecil, akhirnya 0</pre>
+  </div>
+  <div class="callout warn"><strong>Tiga hal yang wajib ada di perulangan while</strong>
+    (1) variabel diberi nilai awal sebelum <code>while</code>, (2) kondisi yang suatu saat bisa False, (3) perintah di dalam blok yang <b>mengubah</b> variabel ke arah kondisi False. Kalau programmu terjebak infinite loop di terminal, tekan <kbd>Ctrl</kbd>+<kbd>C</kbd>.</div>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th></th><th><code>for</code></th><th><code>while</code></th></tr></thead>
+    <tbody>
+      <tr><td>Kapan berhenti?</td><td>Saat item koleksi habis</td><td>Saat kondisi bernilai False</td></tr>
+      <tr><td>Jumlah ulangan</td><td>Sudah pasti (sebanyak item)</td><td>Bisa belum diketahui di awal</td></tr>
+      <tr><td>Contoh</td><td>Cetak semua nama di daftar</td><td>Minta kata sandi sampai benar</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Simulasi</span><h3>Jalankan while langkah demi langkah</h3></div>
+    <p class="i-desc">Ubah nilai awal, kondisi, dan perubahan variabel. Bisakah kamu membuat infinite loop, lalu memperbaikinya?</p>
+    <div id="trWhile"></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Apa yang tampil di layar?</h3></div>
+    <div id="drillWhile"></div>
+  </div>
+
+  <div class="interactive">
+    <div class="i-head"><span class="i-badge">Latihan</span><h3>Lengkapi perulangan while</h3></div>
+    <p class="i-desc">Pilih bagian yang tepat agar hasilnya sesuai komentar dan tidak terjadi infinite loop.</p>
+    <div id="fillWhile"></div>
+  </div>
+</section>
+
+<!-- ================= TAB 7: KUIS ================= -->
+<section class="panel" data-title="Kuis">
+  <div class="panel-head">
+    <span class="eyebrow">Tab 7 · Kuis</span>
+    <h2>Kuis: uji pemahamanmu</h2>
+    <p class="lead">10 soal, dari <b>mudah</b> ke <b>sulit</b>. Jawab semuanya, lalu tekan <b>Lihat Skor</b>. Kamu boleh mengubah jawaban sebelum skor ditampilkan.</p>
+  </div>
+  <div id="quizWrap"></div>
+  <div id="quizResult"></div>
+  <div class="quiz-bar" id="quizBar">
+    <span id="quizCount"><b>0</b> dari 10 soal terjawab</span>
+    <button class="btn btn-primary" id="quizSubmit" type="button" disabled>Lihat Skor</button>
+  </div>
+</section>
+
+<!-- ================= TAB 8: WRAP-UP ================= -->
+<section class="panel" data-title="Wrap-up">
+  <div class="panel-head">
+    <span class="eyebrow">Tab 8 · Wrap-up</span>
+    <h2>Rangkuman perintah kendali</h2>
+    <p class="lead" id="wrapScore">Selamat, kamu sudah sampai di akhir materi!</p>
+  </div>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Perintah</th><th>Bentuk</th><th>Pakai saat…</th></tr></thead>
+    <tbody>
+      <tr><td><b>if</b></td><td><code>if kondisi:</code></td><td>Ada perintah yang hanya dijalankan jika kondisi True</td></tr>
+      <tr><td><b>if-else</b></td><td><code>if …: / else:</code></td><td>Ada dua pilihan: True atau False</td></tr>
+      <tr><td><b>if-elif-else</b></td><td><code>if …: / elif …: / else:</code></td><td>Banyak pilihan, terutama rentang nilai. Urutan kondisi penting!</td></tr>
+      <tr><td><b>match-case</b></td><td><code>match x: / case …: / case _:</code></td><td>Mencocokkan nilai spesifik (menu, tombol, nama hari)</td></tr>
+      <tr><td><b>for</b></td><td><code>for x in koleksi:</code></td><td>Mengulang untuk setiap item list, tuple, string, atau range</td></tr>
+      <tr><td><b>while</b></td><td><code>while kondisi:</code></td><td>Mengulang selama kondisi True; jumlah ulangan belum pasti</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="grid grid-2">
+    <div class="card sum-card"><div class="ic">✍️</div><div><h4>Aturan penulisan</h4><p>Baris <code>if</code>, <code>elif</code>, <code>else</code>, <code>match</code>, <code>case</code>, <code>for</code>, <code>while</code> diakhiri titik dua. Blok di bawahnya menjorok.</p></div></div>
+    <div class="card sum-card"><div class="ic">⚖️</div><div><h4>Kondisi</h4><p>Dibuat dari perbandingan, logika (<code>and or not</code>), dan keanggotaan (<code>in</code>). Nol, <code>None</code>, dan koleksi kosong dianggap False.</p></div></div>
+    <div class="card sum-card"><div class="ic">🔢</div><div><h4>range</h4><p><code>range(start, stop, step)</code> berhenti <b>sebelum</b> stop. Start default 0, step default 1.</p></div></div>
+    <div class="card sum-card"><div class="ic">♾️</div><div><h4>Hindari infinite loop</h4><p>Pastikan variabel di dalam while berubah ke arah yang membuat kondisi False.</p></div></div>
+  </div>
+
+  <h3>Refleksi: centang yang sudah kamu kuasai</h3>
+  <ul class="check-list" id="reflect">
+    <li><label><input type="checkbox"> Aku bisa menulis algoritma IF-ELSE, FOR EACH, dan WHILE untuk masalah sehari-hari.</label></li>
+    <li><label><input type="checkbox"> Aku bisa menulis if-else dengan titik dua dan indentasi yang benar.</label></li>
+    <li><label><input type="checkbox"> Aku paham mengapa urutan kondisi pada if-elif-else itu penting.</label></li>
+    <li><label><input type="checkbox"> Aku bisa memakai match-case, termasuk <code>|</code> dan <code>_</code>.</label></li>
+    <li><label><input type="checkbox"> Aku bisa memakai for dengan list, tuple, string, dan range.</label></li>
+    <li><label><input type="checkbox"> Aku bisa membuat while yang berhenti dengan benar.</label></li>
+  </ul>
+  <p class="lab-note" id="reflectNote"></p>
+
+  <div class="card soft">
+    <b>🚀 Tantangan</b>
+    <ol>
+      <li><b>FizzBuzz:</b> tampilkan angka 1 sampai 30. Ganti kelipatan 3 dengan "Fizz", kelipatan 5 dengan "Buzz", dan kelipatan keduanya dengan "FizzBuzz". (for + if-elif-else)</li>
+      <li><b>Tebak angka:</b> simpan angka rahasia, lalu minta pengguna menebak terus selama tebakannya salah. Beri petunjuk "terlalu besar" atau "terlalu kecil". (while + if-elif-else)</li>
+      <li><b>Kalkulator menu:</b> buat fungsi yang menerima pilihan 1–4 dan memakai match-case untuk memilih operasi +, -, *, /.</li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer class="navbar">
+  <div class="wrap">
+    <button class="btn btn-ghost btn-nav" id="btnPrev" type="button"><span class="arrow">←</span> Kembali</button>
+    <div class="nav-info"><span id="navPos"></span><span class="nav-hint" id="navHint"></span></div>
+    <button class="btn btn-primary btn-nav" id="btnNext" type="button">Aku paham <span class="arrow">→</span></button>
+  </div>
+</footer>
+
+<script src="js/scorm.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
